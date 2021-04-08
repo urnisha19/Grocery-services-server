@@ -7,7 +7,7 @@ const ObjectId = require('mongodb').ObjectId;
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config()
 
-const port = process.env.PORT || 5055;
+const port = 5055;
 const app = express()
 
 admin.initializeApp({
@@ -116,16 +116,11 @@ client.connect(err => {
                 res.send('deleted count: ', result.deletedCount > 0);
             })
     })
-
-
-    // connection check
-    app.get('/', (req, res) => {
-        res.send('Hello World!')
-    })
 });
-
-
-
-app.listen(port, () => {
-    console.log(`App listening at http://localhost:${port}`)
+// connection check
+app.get('/', (req, res) => {
+    res.send('Hello World!')
 })
+
+
+app.listen(process.env.PORT || port)
