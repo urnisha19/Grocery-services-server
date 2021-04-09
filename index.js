@@ -35,7 +35,7 @@ client.connect(err => {
             })
     })
 
-    //get products
+    //get product list
     app.get('/products', (req, res) => {
         productCollection.find({})
             .toArray((err, items) => {
@@ -51,7 +51,7 @@ client.connect(err => {
             })
     })
 
-    //delete product
+    //delete a product
     app.delete('/delete/:id', (req, res) => {
         productCollection.deleteOne({ _id: ObjectId(req.params.id) })
             .then(result => {
@@ -104,9 +104,8 @@ client.connect(err => {
             })
     })
 
-    //delete order
-    app.delete('/delete/:id', (req, res) => {
-        console.log(req.params.id)
+    //delete a order
+    app.delete('/deleteOrder/:id', (req, res) => {
         orderCollection.deleteOne({ _id: ObjectId(req.params.id) })
             .then(result => {
                 res.send('deleted count: ', result.deletedCount > 0);
@@ -116,7 +115,7 @@ client.connect(err => {
 
 // connection check
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Server Connected!')
 })
 
 app.listen(process.env.PORT || port)
